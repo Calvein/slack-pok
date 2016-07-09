@@ -2,9 +2,9 @@
 
 const pokemons = require('./pokemons.json')
 // Same order of each items in pokemons.json
-const languages = [
-    'French',
-    'English',
+const flags = [
+    'fr',
+    'uk',
 ]
 
 module.exports = (pokemon) => {
@@ -14,7 +14,7 @@ module.exports = (pokemon) => {
 
     const attachments = results.map((d) => {
         const text = d.names
-            .map((name, i) => `*${languages[i]}:* ${name}`)
+            .map((name, i) => `:${flags[i]}:: ${name}`)
             .join('\n')
 
         const img = `http://pokeapi.co/media/sprites/pokemon/${d.id}.png`
@@ -26,5 +26,9 @@ module.exports = (pokemon) => {
         }
     })
 
-    return { attachments }
+    if (attachments.length) return { attachments }
+
+    return {
+        text: `Ain't no pokemon called *${pokemon}*, fool.`
+    }
 }
