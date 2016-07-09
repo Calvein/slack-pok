@@ -39,8 +39,16 @@ controller.on('slash_command', (slashCommand, msg) => {
 
     const search = new RegExp(msg.text, 'i')
     const text = pokemons
-        .filter((list) => list.some((pokemon) => search.test(pokemon)))
-        .map((d) => d.map((name, i) => `*${languages[i]}:* ${name}`).join('\n'))
+        .filter((list) => list.names.some((pokemon) => search.test(pokemon)))
+        .map((d) => {
+            const languages = d
+                .map((name, i) => `*${languages[i]}:* ${name}`)
+                .join('\n')
+
+            const img = `http://pokeapi.co/media/sprites/pokemon/${d.id}.png`
+
+            return languages + '\n' + img
+        })
         .join('\n---\n')
 
     slashCommand.replyPublic(msg, text)
