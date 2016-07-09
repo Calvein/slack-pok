@@ -1,0 +1,31 @@
+{
+  "name": "slack-pok",
+  "version": "1.0.0",
+  "description": "Translate a pokémon's name",
+  "main": "index.js",
+  "dependencies": {
+    "botkit": "0.0.5"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Calvein/slack-pok.git"
+  },
+  "keywords": [
+    "slack",
+    "pokemon",
+    "translate"
+  ],
+  "author": "Calvein",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Calvein/slack-pok/issues"
+  },
+  "homepage": "https://github.com/Calvein/slack-pok#readme",
+  "engines": {
+    "node" : "6.3.0"
+  }
+}
