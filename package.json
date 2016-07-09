@@ -4,7 +4,8 @@
   "description": "Translate a pokémon's name",
   "main": "index.js",
   "dependencies": {
-    "botkit": "0.0.5"
+    "botkit": "0.0.5",
+    "botkit-storage-redis": "^1.0.1"
   },
   "devDependencies": {
     "tape": "^4.6.0"

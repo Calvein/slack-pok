@@ -1,14 +1,13 @@
 'use strict'
 
 const Botkit = require('botkit')
-const redis = require('botkit/lib/storage/redis_storage')
+const redis = require('botkit-storage-redis')
 const url = require('url')
 const getPokemon = require('./get-pokemon.js')
 
 // Configure redis
 const redisURL = url.parse(process.env.REDIS_URL)
 const redisStorage = redis({
-    namespace: 'botkit-example',
     host: redisURL.hostname,
     port: redisURL.port,
     auth_pass: redisURL.auth.split(':')[1]
