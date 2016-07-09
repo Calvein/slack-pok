@@ -1,10 +1,21 @@
 'use strict'
 
 const Botkit = require('botkit')
+const redis = require('botkit/lib/storage/redis_storage')
+const url = require('url')
 const getPokemon = require('./get-pokemon.js')
 
+// Configure redis
+const redisURL = url.parse(process.env.REDISCLOUD_URL)
+const redisStorage = redis({
+    namespace: 'botkit-example',
+    host: redisURL.hostname,
+    port: redisURL.port,
+    auth_pass: redisURL.auth.split(':')[1]
+})
+
 const controller = Botkit.slackbot({
-    json_file_store: './db_slackbutton_slash_command/',
+    storage: redisStorage,
 }).configureSlackApp({
     clientId: process.env.CLIENT_ID,
     clientSecret: process.env.CLIENT_SECRET,
@@ -22,16 +33,10 @@ controller.setupWebserver(process.env.PORT, (err, webserver) => {
     })
 })
 
-
 controller.on('slash_command', (slashCommand, msg) => {
-    if (msg.command !== '/pok') {
-        return slashCommand.replyPublic(msg, `I'm afraid I don't know how to ${msg.command} yet.`)
-    }
-
-    // Make sure the token matches!
+    // Make sure the token matches
     if (msg.token !== process.env.VERIFICATION_TOKEN) return
 
     const text = getPokemon(msg.text)
-
     slashCommand.replyPublic(msg, text)
 })
