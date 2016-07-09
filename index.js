@@ -2,7 +2,6 @@
 
 const Botkit = require('botkit')
 
-const config = require('./config.json')
 const pokemons = require('./pokemons.json')
 // Same order of each items in pokemons.json
 const languages = [
