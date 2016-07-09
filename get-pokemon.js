@@ -28,6 +28,7 @@ module.exports = (pokemon) => {
 
     if (attachments.length) return { attachments }
 
+    // No results
     return {
         text: `Ain't no pokemon called *${pokemon}*, fool.`
     }
