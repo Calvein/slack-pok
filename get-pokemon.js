@@ -9,16 +9,26 @@ const languages = [
 
 module.exports = (pokemon) => {
     const search = new RegExp(pokemon, 'i')
-    return pokemons
+    const results = pokemons
         .filter((list) => list.names.some((pokemon) => search.test(pokemon)))
-        .map((d) => {
-            const names = d.names
-                .map((name, i) => `*${languages[i]}:* ${name}`)
-                .join('\n')
 
-            const img = `http://pokeapi.co/media/sprites/pokemon/${d.id}.png`
+    const text = results.map((d) => {
+        return d.names
+            .map((name, i) => `*${languages[i]}:* ${name}`)
+            .join('\n')
 
-            return names + '\n' + img
-        })
-        .join('\n---\n')
+        const img = `http://pokeapi.co/media/sprites/pokemon/${d.id}.png`
+
+        return names + '\n' + img
+    })
+    .join('\n---\n')
+
+    const images = results.map((d) => ({
+        thumb_url: `http://pokeapi.co/media/sprites/pokemon/${d.id}.png`
+    }))
+
+    return {
+        text: text,
+        attachments: images,
+    }
 }
