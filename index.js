@@ -6,7 +6,7 @@ const url = require('url')
 const getPokemon = require('./get-pokemon.js')
 
 // Configure redis
-const redisURL = url.parse(process.env.REDISCLOUD_URL)
+const redisURL = url.parse(process.env.REDIS_URL)
 const redisStorage = redis({
     namespace: 'botkit-example',
     host: redisURL.hostname,
