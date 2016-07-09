@@ -6,9 +6,12 @@
   "dependencies": {
     "botkit": "0.0.5"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "tape": "^4.6.0"
+  },
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "test": "tape test.js"
   },
   "repository": {
     "type": "git",
@@ -26,6 +29,6 @@
   },
   "homepage": "https://github.com/Calvein/slack-pok#readme",
   "engines": {
-    "node" : "6.3.0"
+    "node": "6.3.0"
   }
 }

@@ -1,13 +1,7 @@
 'use strict'
 
 const Botkit = require('botkit')
-
-const pokemons = require('./pokemons.json')
-// Same order of each items in pokemons.json
-const languages = [
-    'French',
-    'English',
-]
+const getPokemon = require('./get-pokemon.js')
 
 const controller = Botkit.slackbot({
     json_file_store: './db_slackbutton_slash_command/',
@@ -37,19 +31,7 @@ controller.on('slash_command', (slashCommand, msg) => {
     // Make sure the token matches!
     if (msg.token !== process.env.VERIFICATION_TOKEN) return
 
-    const search = new RegExp(msg.text, 'i')
-    const text = pokemons
-        .filter((list) => list.names.some((pokemon) => search.test(pokemon)))
-        .map((d) => {
-            const languages = d
-                .map((name, i) => `*${languages[i]}:* ${name}`)
-                .join('\n')
-
-            const img = `http://pokeapi.co/media/sprites/pokemon/${d.id}.png`
-
-            return languages + '\n' + img
-        })
-        .join('\n---\n')
+    const text = getPokemon(msg.text)
 
     slashCommand.replyPublic(msg, text)
 })
