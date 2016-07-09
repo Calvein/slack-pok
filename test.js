@@ -5,9 +5,10 @@ const getPokemon = require('./get-pokemon.js')
 
 test('get pikachu', (t) => {
     const pika = {
-        text: '*French:* Pikachu\n*English:* Pikachu',
         attachments: [{
-            thumb_url: 'http://pokeapi.co/media/sprites/pokemon/25.png'
+            pretext: '*French:* Pikachu\n*English:* Pikachu',
+            image_url: 'http://pokeapi.co/media/sprites/pokemon/25.png',
+            mrkdwn_in: ['pretext']
         }]
     }
     t.deepEqual(getPokemon('pika'), pika)

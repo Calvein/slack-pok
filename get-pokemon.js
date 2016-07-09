@@ -12,23 +12,19 @@ module.exports = (pokemon) => {
     const results = pokemons
         .filter((list) => list.names.some((pokemon) => search.test(pokemon)))
 
-    const text = results.map((d) => {
-        return d.names
+    const attachments = results.map((d) => {
+        const text = d.names
             .map((name, i) => `*${languages[i]}:* ${name}`)
             .join('\n')
 
         const img = `http://pokeapi.co/media/sprites/pokemon/${d.id}.png`
 
-        return names + '\n' + img
+        return {
+            pretext: text,
+            image_url: img,
+            mrkdwn_in: ['pretext'],
+        }
     })
-    .join('\n---\n')
 
-    const images = results.map((d) => ({
-        thumb_url: `http://pokeapi.co/media/sprites/pokemon/${d.id}.png`
-    }))
-
-    return {
-        text: text,
-        attachments: images,
-    }
+    return { attachments }
 }
